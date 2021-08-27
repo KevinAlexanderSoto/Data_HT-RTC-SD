@@ -3,21 +3,21 @@
 
   int h_activado  ;
   int h_actual ;
-  float dataArray [3];
+  float dataArray []= {1.2,2,1.4,4};
   int intervalo_Activado = 3;//brecha toma de datos EN MINUTOS 
   
   void setup() {
       Serial.begin(9600); 
       Serial.println("serial init");// inicializa comunicacion serie a 9600 bps
-      INICIAR_MODULO ();// inicia el RTC con fecha de compilacion y setea otras opciones
+     /*  INICIAR_MODULO ();// inicia el RTC con fecha de compilacion y setea otras opciones
       INICIAR_MODULO_DHT1();
-      INICIAR_MODULO_DHT2();
+      INICIAR_MODULO_DHT2(); */
       INICIAR_LECTOR_SD ();
-      h_activado = GET_MINUTE()+ intervalo_Activado;
+      //h_activado = GET_MINUTE()+ intervalo_Activado;
   }
   void loop() {
     //Toma_datos();
-    Serial.print("MINUTO:");
+    /* Serial.print("MINUTO:");
     Serial.println(GET_MINUTE());
     delay(100);
  Serial.println( "...........................");
@@ -32,7 +32,9 @@ Serial.println( "...........................");
     Serial.println( GET_HUMIDITY_SENSOR2());
    
     Serial.print("TEMPERATURA_DHT11_SENSOR2:");
-    Serial.println( GET_TEMPERATURE_SENSOR2());
+    Serial.println( GET_TEMPERATURE_SENSOR2()); */
+
+    WRITE_DATA_ON_SD(dataArray);
     delay(5000);
   }
   
