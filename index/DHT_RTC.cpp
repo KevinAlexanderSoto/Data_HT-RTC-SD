@@ -6,7 +6,6 @@
 
 RTC_DS1307 rtc;    // crea objeto del tipo RTC_DS1307
 
-String daysOfTheWeek[7] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
 
 void INICIAR_MODULO () {
  
@@ -39,11 +38,6 @@ int GET_MINUTE() {
 
 }
 
-String GET_DAY(){
-  DateTime fecha = rtc.now(); 
-  Serial.println(daysOfTheWeek[fecha.dayOfTheWeek()]);
-  
-  }
 
 
 ////////////////////////DHT11 sensor1///////////////////////////////7
@@ -120,19 +114,18 @@ void WRITE_DATA_ON_SD(float data[3] )
   if (dataFile) { 
       
         //TODO :  AGREGAR FECHA 
-
-        dataFile.print("HUMIDITY SENSOR1:");
+        //HUMIDITY SENSOR1  
         dataFile.print(data[0]);
-        dataFile.print("TEMPERATURA SENSOR1:");
+        //TEMPERATURA SENSOR1:
+        dataFile.print("        ");
         dataFile.print(data[1]);
-        
-        dataFile.println("");
+        dataFile.println("  ");
         ///////////data sensor 2///////////////////7
-        dataFile.print("HUMIDITY SENSOR2:");
-        dataFile.print(data[2]);
-        dataFile.print("TEMPERATURA SENSOR2:");
-        dataFile.print(data[3]);
-        
+        //dataFile.println("HUMIDITY SENSOR2:  ");
+        //dataFile.print(data[2]);
+        //dataFile.println("TEMPERATURA SENSOR2:");
+        //dataFile.print(data[3]);
+        //dataFile.println("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz");
         dataFile.close();
   
   } 
