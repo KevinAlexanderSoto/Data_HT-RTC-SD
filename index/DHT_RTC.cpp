@@ -97,14 +97,13 @@ float GET_TEMPERATURE_SENSOR2(){
 }
 
 //////////////////////// ESCRITURA SD ///////////////////////////////////////////
-#define sspin 10
 File dataFile;
 
 void INICIAR_LECTOR_SD ()
 {
 
   Serial.print(F("Iniciando SD ..."));
-  if (!SD.begin(sspin))
+  if (!SD.begin(10))
   {
     Serial.println(F("Error al iniciar SD"));
     return;
