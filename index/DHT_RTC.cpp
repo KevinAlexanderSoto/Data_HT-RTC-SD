@@ -17,8 +17,6 @@ void INICIAR_MODULO () {
  Serial.println("Modulo RTC inicializado!");
  if (! rtc.isrunning()) {
     Serial.println("RTC is NOT running, let's set the time!");
-    // When time needs to be set on a new device, or after a power loss, the
-    // following line sets the RTC to the date & time this sketch was compiled
     rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
     // This line sets the RTC with an explicit date & time, for example to set
     // January 21, 2014 at 3am you would call:
@@ -106,7 +104,7 @@ void INICIAR_LECTOR_SD ()
 
 }
 
-void WRITE_DATA_ON_SD(float data[3] )
+void WRITE_DATA_ON_SD(float data[4] )
 {
   // Abrir archivo y escribir valor
   dataFile = SD.open("data.txt", FILE_WRITE);
@@ -116,18 +114,21 @@ void WRITE_DATA_ON_SD(float data[3] )
         //TODO :  AGREGAR FECHA 
         //HUMIDITY SENSOR1  
         dataFile.print(data[0]);
-        //TEMPERATURA SENSOR1:
+        
         dataFile.print("        ");
+        //TEMPERATURA SENSOR1:
         dataFile.print(data[1]);
-        dataFile.println("  ");
+       dataFile.print("        ");
         ///////////data sensor 2///////////////////7
-        //dataFile.println("HUMIDITY SENSOR2:  ");
-        //dataFile.print(data[2]);
-        //dataFile.println("TEMPERATURA SENSOR2:");
-        //dataFile.print(data[3]);
-        //dataFile.println("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz");
+          //HUMIDITY SENSOR2
+         dataFile.print(data[2]);
+        //TEMPERATURA SENSOR2:
+        dataFile.print("        ");
+        dataFile.print(data[3]);
+
+         dataFile.println("  ");
         dataFile.close();
-  
+  Serial.println( data[3]);
   } 
   else {
     Serial.println("Error al abrir el archivo");
