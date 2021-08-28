@@ -22,6 +22,7 @@ sensor TH 1
 
  * data a pin 3
  * vcc 5v
-
- RTC
  
+ Led de aviso 
+
+ * pin 4 

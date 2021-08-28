@@ -3,37 +3,22 @@
 
   int h_activado  ;
   int h_actual ;
-  float dataArray [3];
+  float dataArray [4];
   int intervalo_Activado = 3;//brecha toma de datos EN MINUTOS 
+  int ledInfo=4 ;
   
   void setup() {
-      Serial.begin(9600); 
-      Serial.println("serial init");// inicializa comunicacion serie a 9600 bps
+      
       INICIAR_MODULO ();// inicia el RTC con fecha de compilacion y setea otras opciones
       INICIAR_MODULO_DHT1();
       INICIAR_MODULO_DHT2();
       INICIAR_LECTOR_SD ();
+      pinMode(ledInfo, OUTPUT);
       h_activado = GET_MINUTE()+ intervalo_Activado;
   }
   void loop() {
-    //Toma_datos();
-    Serial.print("MINUTO:");
-    Serial.println(GET_MINUTE());
-    delay(100);
- Serial.println( "...........................");
-  Serial.print("HUMIDITY SENSOR1:");
-    Serial.println( GET_HUMIDITY_SENSOR1());
+    Toma_datos();
    
-    Serial.print("TEMPERATURA_DHT11_SENSOR1:"); 
-   Serial.println( GET_TEMPERATURE_SENSOR1());
-   delay(100);
-Serial.println( "...........................");
-  Serial.print("HUMIDITY SENSOR2:");
-    Serial.println( GET_HUMIDITY_SENSOR2());
-   
-    Serial.print("TEMPERATURA_DHT11_SENSOR2:");
-    Serial.println( GET_TEMPERATURE_SENSOR2());
-    delay(5000);
   }
   
   void Toma_datos(){
@@ -54,7 +39,9 @@ Serial.println( "...........................");
 
     //TODO : guardar data en la sd
     WRITE_DATA_ON_SD(dataArray);
-        
+  digitalWrite(ledInfo, HIGH);  //avisa cuando se escribe un programa 
+  delay(1000);                       
+  digitalWrite(ledInfo, LOW);
     h_activado = GET_MINUTE()+ intervalo_Activado;// para volver a comparar y hacer el ciclo 
     }
     

@@ -6,8 +6,6 @@
 
 RTC_DS1307 rtc;    // crea objeto del tipo RTC_DS1307
 
-String daysOfTheWeek[7] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
-
 void INICIAR_MODULO () {
  
  if (! rtc.begin()) {       // si falla la inicializacion del modulo
@@ -18,8 +16,6 @@ void INICIAR_MODULO () {
  Serial.println("Modulo RTC inicializado!");
  if (! rtc.isrunning()) {
     Serial.println("RTC is NOT running, let's set the time!");
-    // When time needs to be set on a new device, or after a power loss, the
-    // following line sets the RTC to the date & time this sketch was compiled
     rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
     // This line sets the RTC with an explicit date & time, for example to set
     // January 21, 2014 at 3am you would call:
@@ -38,12 +34,6 @@ int GET_MINUTE() {
  return fecha.minute();
 
 }
-
-String GET_DAY(){
-  DateTime fecha = rtc.now(); 
-  Serial.println(daysOfTheWeek[fecha.dayOfTheWeek()]);
-  
-  }
 
 
 ////////////////////////DHT11 sensor1///////////////////////////////7
@@ -112,27 +102,38 @@ void INICIAR_LECTOR_SD ()
 
 }
 
-void WRITE_DATA_ON_SD(float data[3] )
+void WRITE_DATA_ON_SD(float data[4] )
 {
   // Abrir archivo y escribir valor
   dataFile = SD.open("data.txt", FILE_WRITE);
-  
+     
   if (dataFile) { 
-      
-        //TODO :  AGREGAR FECHA 
-
-        dataFile.print("HUMIDITY SENSOR1:");
+     DateTime j = rtc.now();
+ 
+        //HUMIDITY SENSOR1:
         dataFile.print(data[0]);
-        dataFile.print("TEMPERATURA SENSOR1:");
+        dataFile.print("     ");
+        //TEMPERATURA SENSOR1:
         dataFile.print(data[1]);
+        dataFile.print("     ");
         
-        dataFile.println("");
         ///////////data sensor 2///////////////////7
-        dataFile.print("HUMIDITY SENSOR2:");
+        //HUMIDITY SENSOR2:
         dataFile.print(data[2]);
-        dataFile.print("TEMPERATURA SENSOR2:");
+        dataFile.print("     ");
+        //TEMPERATURA SENSOR2:
         dataFile.print(data[3]);
+        dataFile.print("     ");
         
+        //TODO :  AGREGAR FECHA  
+        dataFile.print(j.day());
+        dataFile.print(j.month());
+        dataFile.print(j.year());
+        dataFile.print("     ");
+        dataFile.print(j.hour()) ;
+        dataFile.print(":") ;
+        dataFile.print(j.minute()) ;  
+        dataFile.println(" ");       
         dataFile.close();
   
   } 
