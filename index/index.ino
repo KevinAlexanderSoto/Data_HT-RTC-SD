@@ -29,7 +29,7 @@
       
      h_actual = GET_MINUTE();
      
-    if(h_actual >= h_activado){
+    if(h_actual >= h_activado && h_actual-h_activado < 3){
       
     //TODO : leer temperatura , humedad
     dataArray [0]= GET_HUMIDITY_SENSOR1();
