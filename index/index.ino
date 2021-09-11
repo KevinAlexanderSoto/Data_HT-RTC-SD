@@ -18,13 +18,13 @@
   }
   void loop() {
     Toma_datos();
-   
+   delay(2000); 
   }
   
   void Toma_datos(){
     
-    if(h_activado > 60){// para caso especial de usar minutos, con hora es 24
-      h_activado = h_activado - 60;
+    if(h_activado >= 59){// para caso especial de usar minutos, con hora es 24
+      h_activado = h_activado - 59;
       }
       
      h_actual = GET_MINUTE();
@@ -40,7 +40,7 @@
     //TODO : guardar data en la sd
     WRITE_DATA_ON_SD(dataArray);
   digitalWrite(ledInfo, HIGH);  //avisa cuando se escribe un programa 
-  delay(1000);                       
+  delay(3000);                       
   digitalWrite(ledInfo, LOW);
     h_activado = GET_MINUTE()+ intervalo_Activado;// para volver a comparar y hacer el ciclo 
     }
