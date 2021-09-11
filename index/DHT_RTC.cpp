@@ -112,24 +112,26 @@ void WRITE_DATA_ON_SD(float data[4] )
  
         //HUMIDITY SENSOR1:
         dataFile.print(data[0]);
-        dataFile.print("     ");
+        dataFile.print("    ");
         //TEMPERATURA SENSOR1:
         dataFile.print(data[1]);
-        dataFile.print("     ");
+        dataFile.print("    ");
         
         ///////////data sensor 2///////////////////7
         //HUMIDITY SENSOR2:
         dataFile.print(data[2]);
-        dataFile.print("     ");
+        dataFile.print("    ");
         //TEMPERATURA SENSOR2:
         dataFile.print(data[3]);
-        dataFile.print("     ");
+        dataFile.print("    ");
         
         //TODO :  AGREGAR FECHA  
         dataFile.print(j.day());
+        dataFile.println("/");
         dataFile.print(j.month());
+        dataFile.println("/");
         dataFile.print(j.year());
-        dataFile.print("     ");
+        dataFile.print("    ");
         dataFile.print(j.hour()) ;
         dataFile.print(":") ;
         dataFile.print(j.minute()) ;  
