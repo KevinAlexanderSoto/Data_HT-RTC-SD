@@ -106,30 +106,32 @@ void WRITE_DATA_ON_SD(float data[4] )
 {
   // Abrir archivo y escribir valor
   dataFile = SD.open("data.txt", FILE_WRITE);
-     
-  if (dataFile) { 
+    float nan= sqrt (-1); 
+    
+  if (dataFile ) { 
      DateTime j = rtc.now();
  
         //HUMIDITY SENSOR1:
-        dataFile.print(data[0]);
+        dataFile.print((data[0] == nan) ? 00.00 :data[0]  );
         dataFile.print("    ");
         //TEMPERATURA SENSOR1:
-        dataFile.print(data[1]);
+        dataFile.print((data[1] == nan) ? 00.00 :data[1] );
         dataFile.print("    ");
         
         ///////////data sensor 2///////////////////7
         //HUMIDITY SENSOR2:
-        dataFile.print(data[2]);
+        dataFile.print((data[2] == nan) ? 00.00 :data[2] );
         dataFile.print("    ");
         //TEMPERATURA SENSOR2:
-        dataFile.print(data[3]);
+        dataFile.print((data[3] == nan) ? 00.00 :data[3] );
         dataFile.print("    ");
         
-        //TODO :  AGREGAR FECHA  
+       
+   //TODO :  AGREGAR FECHA  
         dataFile.print(j.day());
-        dataFile.println("/");
+        dataFile.print("/");
         dataFile.print(j.month());
-        dataFile.println("/");
+        dataFile.print("/");
         dataFile.print(j.year());
         dataFile.print("    ");
         dataFile.print(j.hour()) ;
@@ -140,7 +142,11 @@ void WRITE_DATA_ON_SD(float data[4] )
   
   } 
   else {
-    Serial.println("Error al abrir el archivo");
+    //Serial.println("Error al abrir el archivo");
+
+    
   }
+  
+        
   delay(500);
 }
