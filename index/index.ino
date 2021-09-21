@@ -31,14 +31,14 @@
      
     if(h_actual >= h_activado && h_actual-h_activado < 3){
       
-    //TODO : leer temperatura , humedad
     dataArray [0]= GET_HUMIDITY_SENSOR1();
     dataArray [1]= GET_TEMPERATURE_SENSOR1();
     dataArray [2]= GET_HUMIDITY_SENSOR2();
     dataArray [3]= GET_TEMPERATURE_SENSOR2();
 
-    //TODO : guardar data en la sd
+    // guardar data en la sd
     WRITE_DATA_ON_SD(dataArray);
+    
   digitalWrite(ledInfo, HIGH);  //avisa cuando se escribe un programa 
   delay(3000);                       
   digitalWrite(ledInfo, LOW);

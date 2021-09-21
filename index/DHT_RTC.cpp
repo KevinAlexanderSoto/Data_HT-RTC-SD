@@ -3,6 +3,7 @@
 #include <RTClib.h>   // incluye libreria para el manejo del modulo RTC
 #include <SD.h> // para manejo del lector SD 
 #include <SPI.h>
+#include <DHT.h> // para manejo del los sensore Humedad y Temperatura 
 
 RTC_DS1307 rtc;    // crea objeto del tipo RTC_DS1307
 
@@ -38,9 +39,8 @@ int GET_MINUTE() {
 
 ////////////////////////DHT11 sensor1///////////////////////////////7
 
-#include <DHT.h>
 
-#define DHT1PIN 2     // Digital pin connected to the DHT sensor
+#define DHT1PIN 2     // Digital pin connected to the DHT sensor 1
 // Feather HUZZAH ESP8266 note: use pins 3, 4, 5, 12, 13 or 14 --
 // Pin 15 can work but DHT must be disconnected during program upload.
 
@@ -64,9 +64,7 @@ float GET_TEMPERATURE_SENSOR1(){
 }
 ////////////////////////DHT11 sensor2//////////////////////////////7
 
-#include <DHT.h>
-
-#define DHT2PIN 3     // Digital pin connected to the DHT sensor
+#define DHT2PIN 3     // Digital pin connected to the DHT sensor2
 
 #define DHTTYPE DHT11
  
@@ -104,27 +102,37 @@ void INICIAR_LECTOR_SD ()
 
 void WRITE_DATA_ON_SD(float data[4] )
 {
+  
+    // para manejo del error (NaN) en la medicion 
+  for (size_t i = 0; i < 4; i++)
+  {
+    if (isnan(data[i]))
+    {
+      data[i] = 00.00; 
+    }
+    
+  }
+  
   // Abrir archivo y escribir valor
   dataFile = SD.open("data.txt", FILE_WRITE);
-    float nan= sqrt (-1); 
-    
   if (dataFile ) { 
      DateTime j = rtc.now();
- 
+     
+      ///////////data sensor 1///////////////////7
         //HUMIDITY SENSOR1:
-        dataFile.print((data[0] == nan) ? 00.00 :data[0]  );
-        dataFile.print("    ");
+        dataFile.print(data[0]  );
+        dataFile.print("   ");
         //TEMPERATURA SENSOR1:
-        dataFile.print((data[1] == nan) ? 00.00 :data[1] );
-        dataFile.print("    ");
+        dataFile.print(data[1] );
+        dataFile.print("   ");
         
         ///////////data sensor 2///////////////////7
         //HUMIDITY SENSOR2:
-        dataFile.print((data[2] == nan) ? 00.00 :data[2] );
-        dataFile.print("    ");
+        dataFile.print(data[2] );
+        dataFile.print("   ");
         //TEMPERATURA SENSOR2:
-        dataFile.print((data[3] == nan) ? 00.00 :data[3] );
-        dataFile.print("    ");
+        dataFile.print(data[3] );
+        dataFile.print("   ");
         
        
    //TODO :  AGREGAR FECHA  
@@ -133,7 +141,7 @@ void WRITE_DATA_ON_SD(float data[4] )
         dataFile.print(j.month());
         dataFile.print("/");
         dataFile.print(j.year());
-        dataFile.print("    ");
+        dataFile.print("   ");
         dataFile.print(j.hour()) ;
         dataFile.print(":") ;
         dataFile.print(j.minute()) ;  
