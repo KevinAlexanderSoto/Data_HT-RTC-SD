@@ -4,9 +4,11 @@
 #include <SD.h> // para manejo del lector SD 
 #include <SPI.h>
 #include <DHT.h> // para manejo del los sensore Humedad y Temperatura 
+#include <BH1750.h>//para manejo del sendor de lux
 
-RTC_DS1307 rtc;    // crea objeto del tipo RTC_DS1307
-
+RTC_DS1307 rtc;    // crea objeto del tipo RTC_DS1307 , tiene dirrecion 0X68
+BH1750 medirlux1;// TIENE direccion 0x23
+BH1750 medirlux2;// TIENE direccion 0x5C CONECTARLO A VCC
 void INICIAR_MODULO () {
  
  if (! rtc.begin()) {       // si falla la inicializacion del modulo
@@ -15,14 +17,26 @@ void INICIAR_MODULO () {
         abort();
  }
  Serial.println("Modulo RTC inicializado!");
- if (! rtc.isrunning()) {
+
+ if ( !rtc.isrunning()) {
     Serial.println("RTC is NOT running, let's set the time!");
     rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
     // This line sets the RTC with an explicit date & time, for example to set
     // January 21, 2014 at 3am you would call:
     // rtc.adjust(DateTime(2014, 1, 21, 3, 0, 0));
-  }      
+  }
 }
+
+void INICIAR_SENSOR_LUX(){
+  Wire.begin();
+  medirlux1.begin();
+  
+}
+
+void INICIAS_SENSOR_LUX2(){
+  Wire.begin();
+  medirlux2.begin();
+  };
 
 int GET_HOUR() {
  DateTime fecha = rtc.now();      // funcion que devuelve fecha y horario en formato
@@ -84,7 +98,17 @@ float GET_TEMPERATURE_SENSOR2(){
     return dht2.readTemperature();
 }
 
-//////////////////////// ESCRITURA SD ///////////////////////////////////////////
+////////////////////////LECTURA LUX////////////////////////////////////
+int GetLux1(){
+  return medirlux1.readLightLevel();
+  
+  };
+
+int GetLux2(){
+  return medirlux2.readLightLevel();
+  
+  };
+/////////////////////////ESCRITURA SD ///////////////////////////////////////////
 File dataFile;
 
 void INICIAR_LECTOR_SD ()
@@ -125,6 +149,9 @@ void WRITE_DATA_ON_SD(float data[4] )
         //TEMPERATURA SENSOR1:
         dataFile.print(data[1] );
         dataFile.print("   ");
+        //LUX 1
+        dataFile.print(data[4] );
+        dataFile.print("   ");
         
         ///////////data sensor 2///////////////////7
         //HUMIDITY SENSOR2:
@@ -133,6 +160,9 @@ void WRITE_DATA_ON_SD(float data[4] )
         //TEMPERATURA SENSOR2:
         dataFile.print(data[3] );
         dataFile.print("   ");
+        //LUX 2
+        dataFile.print(data[5] );
+        dataFile.print("   ");        
         
        
    //TODO :  AGREGAR FECHA  

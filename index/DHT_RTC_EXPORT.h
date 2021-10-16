@@ -16,7 +16,11 @@ void INICIAR_MODULO_DHT2();
 float GET_HUMIDITY_SENSOR2();
 
 float GET_TEMPERATURE_SENSOR2();
-
+/////////////////////lectura lux///////////////////////////////
+void INICIAR_SENSOR_LUX();
+void INICIAS_SENSOR_LUX2();
+int GetLux1();
+int GetLux2();
 //////////////////////// ESCRITURA SD ///////////////////////////////////////////
 
 void INICIAR_LECTOR_SD ();
