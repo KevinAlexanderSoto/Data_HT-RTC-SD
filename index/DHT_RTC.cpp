@@ -97,7 +97,27 @@ float GET_HUMIDITY_SENSOR2(){
 float GET_TEMPERATURE_SENSOR2(){
     return dht2.readTemperature();
 }
+////////////////////////DHT11 sensor3//////////////////////////////7
 
+#define DHT3PIN 5    // Digital pin connected to the DHT sensor3
+
+#define DHTTYPE DHT11
+ 
+DHT dht3(DHT3PIN, DHTTYPE);
+void INICIAR_MODULO_DHT3(){
+    
+    dht3.begin();
+    Serial.println(F("DHT11 sensor3 TEST"));
+
+}
+
+float GET_HUMIDITY_SENSOR3(){
+    return dht3.readHumidity();
+}
+
+float GET_TEMPERATURE_SENSOR3(){
+    return dht3.readTemperature();
+}
 ////////////////////////LECTURA LUX////////////////////////////////////
 int GetLux1(){
   return medirlux1.readLightLevel();
