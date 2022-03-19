@@ -9,6 +9,7 @@
 RTC_DS1307 rtc;    // crea objeto del tipo RTC_DS1307 , tiene dirrecion 0X68
 BH1750 medirlux1;// TIENE direccion 0x23
 BH1750 medirlux2;// TIENE direccion 0x5C CONECTARLO A VCC
+BH1750 medirlux3;
 void INICIAR_MODULO () {
  
  if (! rtc.begin()) {       // si falla la inicializacion del modulo
