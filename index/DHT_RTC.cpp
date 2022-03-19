@@ -7,9 +7,24 @@
 #include <BH1750.h>//para manejo del sendor de lux
 
 RTC_DS1307 rtc;    // crea objeto del tipo RTC_DS1307 , tiene dirrecion 0X68
+
 BH1750 medirlux1;// TIENE direccion 0x23
 BH1750 medirlux2;// TIENE direccion 0x5C CONECTARLO A VCC
 BH1750 medirlux3;
+
+//puertos de datos sensores lux 
+int inLux1 = 1; 
+int inLux1-2 = 2;
+
+int inLux2 = 1; 
+int inLux2-2 = 2;
+
+int inLux3 = 1; 
+int inLux3-2 = 2;
+
+int inLux4 = 1; 
+int inLux4-2 = 2;
+
 void INICIAR_MODULO () {
  
  if (! rtc.begin()) {       // si falla la inicializacion del modulo
@@ -29,13 +44,23 @@ void INICIAR_MODULO () {
 }
 
 void INICIAR_SENSOR_LUX(){
-  Wire.begin();
-  medirlux1.begin();
+  Wire.begin(inLux1,inLux1-2);
+  medirlux1.begin(BH1750::CONTINUOUS_HIGH_RES_MODE, 0x23, &Wire);
   
 }
 
 void INICIAS_SENSOR_LUX2(){
-  Wire.begin();
+  Wire2.begin(inLux2,inLux2-2);
+  medirlux2.begin(BH1750::CONTINUOUS_HIGH_RES_MODE, 0x23, &Wire2);
+  };
+
+  void INICIAS_SENSOR_LUX3(){
+  Wire.begin(inLux3,inLux3-2);
+  medirlux2.begin();
+  };
+
+  void INICIAS_SENSOR_LUX4(){
+  Wire.begin(inLux4,inLux4-2);
   medirlux2.begin();
   };
 
