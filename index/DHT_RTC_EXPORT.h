@@ -25,8 +25,12 @@ float GET_TEMPERATURE_SENSOR3();
 /////////////////////lectura lux///////////////////////////////
 void INICIAR_SENSOR_LUX();
 void INICIAS_SENSOR_LUX2();
+void INICIAS_SENSOR_LUX3();
+void INICIAS_SENSOR_LUX4();
 int GetLux1();
 int GetLux2();
+int GetLux3();
+int GetLux4();
 //////////////////////// ESCRITURA SD ///////////////////////////////////////////
 
 void INICIAR_LECTOR_SD ();

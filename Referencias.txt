@@ -1,0 +1,9 @@
+https://programarfacil.com/blog/arduino-blog/comunicacion-i2c-con-arduino/
+
+https://programarfacil.com/esp8266/proyectos-con-esp8266-iot/
+
+https://programarfacil.com/podcast/esp8266-wifi-coste-arduino/
+
+https://github.com/claws/BH1750
+
+https://blog.naver.com/ysahn2k/221398535903 -->LINK COREANO

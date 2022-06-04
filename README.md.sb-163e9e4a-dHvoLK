@@ -57,4 +57,4 @@ Anexo
 --------
 
 * sensor de humdad y temperatura tiene tres pines, vcc,GND, y datos
-* sensor de lux tiene 4 pines: GND y VCC , SDA y scl para comunicación(data), ADO para ponerle direccion al sensor, el sensor funciona por comunicacion serial(creo),estos utilizan comunicación I2C,se va a hacer un puente con otro Arduino que va a cambiar la dirrecion IC2 de 2 sensores y lo va a mandar al ardino principal, los otros dos se conectan directamente al Arduino principal. Esto debido a que los sensores de lux solo tienen 2 dirreciones  
+* sensor de lux tiene 4 pines: GND y VCC , SDA y scl para comunicación(data), ADO para ponerle direccion al sensor, el sensor funciona por comunicacion serial(creo) 

@@ -11,7 +11,7 @@ RTC_DS1307 rtc;    // crea objeto del tipo RTC_DS1307 , tiene dirrecion 0X68
 BH1750 medirlux1;// TIENE direccion 0x23
 BH1750 medirlux2;// TIENE direccion 0x5C CONECTARLO A VCC
 BH1750 medirlux3;
-
+BH1750 medirlux4;
 //puertos de datos sensores lux 
 int inLux1 = 1; 
 int inLux1-2 = 2;
@@ -43,27 +43,32 @@ void INICIAR_MODULO () {
   }
 }
 
-void INICIAR_SENSOR_LUX(){
+//------------------------Iniciado de lux-----------------------------------
+  void INICIAR_SENSOR_LUX(){
   Wire.begin(inLux1,inLux1-2);
   medirlux1.begin(BH1750::CONTINUOUS_HIGH_RES_MODE, 0x23, &Wire);
   
-}
+  }
 
-void INICIAS_SENSOR_LUX2(){
+  void INICIAS_SENSOR_LUX2(){
   Wire2.begin(inLux2,inLux2-2);
+  //TODO: Por revisar
   medirlux2.begin(BH1750::CONTINUOUS_HIGH_RES_MODE, 0x23, &Wire2);
   };
 
   void INICIAS_SENSOR_LUX3(){
   Wire.begin(inLux3,inLux3-2);
-  medirlux2.begin();
+  //TODO: Por revisar
+  medirlux2.begin(BH1750::CONTINUOUS_HIGH_RES_MODE, 0x23, &Wire2);
   };
 
   void INICIAS_SENSOR_LUX4(){
   Wire.begin(inLux4,inLux4-2);
-  medirlux2.begin();
+  //TODO: Por revisar
+  medirlux2.begin(BH1750::CONTINUOUS_HIGH_RES_MODE, 0x23, &Wire2);
   };
 
+//------------------------------------------------------------------------------
 int GET_HOUR() {
  DateTime fecha = rtc.now();      // funcion que devuelve fecha y horario en formato
  return fecha.hour();
@@ -152,6 +157,14 @@ int GetLux1(){
 
 int GetLux2(){
   return medirlux2.readLightLevel();
+  
+  };
+  int GetLux3(){
+  return medirlux3.readLightLevel();
+  
+  };
+  int GetLux4(){
+  return medirlux4.readLightLevel();
   
   };
 /////////////////////////ESCRITURA SD ///////////////////////////////////////////
